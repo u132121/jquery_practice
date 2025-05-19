@@ -16,6 +16,14 @@
   <script src="../../common/js/jquery.js"></script>
   <script>
     // 回答はここに書いてね
+    $.ajax({
+      url: 'https://~~~~~',
+      method: 'GET'
+    }).done(function(res) {
+      console.log(res);
+    }).fail(function(err) {
+      console.log(err);
+    });
   </script>
 </body>
 </html>

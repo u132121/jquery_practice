@@ -61,6 +61,22 @@
       // ・連続で何回もホバーした時、手を止めているのにリストがスライドし続けないか
       // ・出てきたリストの上にホバーできるか
       // ※必ずレビュー前に上記挙動が問題ないか確認すること
+
+      // 表示する関数
+      function showChildListMenu() {
+        $(this).children(".menu__list__childList")  // 子のulを取得
+                .stop()                             // 動作中のアニメーション処理の中止
+                .slideDown();                       // スライドして表示
+        }
+        // 非表示にする関数
+      function hideChildListMenu() {
+        $(this).children(".menu__list__childList")
+               .stop()
+               .slideUp();
+      }
+
+      $(".menu__list li").hover(showChildListMenu, hideChildListMenu);
+
     </script>
   </body>
 </html>
