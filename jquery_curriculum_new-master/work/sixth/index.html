@@ -43,6 +43,7 @@
 
     function pokemonSearch() {
       let pokemonNo = parseInt(Math.random()*151 + 1);
+
       $.ajax({
         url: 'https://pokeapi.co/api/v2/pokemon/' + pokemonNo,
         method: 'GET'
@@ -50,6 +51,19 @@
         $("#wrapper").html(encountHtml);
         $("#wrapper div img").attr('src', res.sprites.front_default);
         $("#wrapper div img").attr('alt', res.name);
+
+        pokemonJapanName(res.species.url);
+      }).fail(function(err) {
+        console.log(err);
+      })
+    }
+
+    function pokemonJapanName(speciesUrl) {
+      $.ajax({
+        url: speciesUrl,
+        method: 'GET'
+      }).done(function(res) {
+        $(".name").text(res.names[0].name);
       }).fail(function(err) {
         console.log(err);
       })
