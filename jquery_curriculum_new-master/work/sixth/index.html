@@ -27,6 +27,19 @@
         <button class="btn" data-js="reset">逃げる</button>
       </div>
     `;
+    let doneHtml =
+    `
+      <p class="name">ゲットしました</p>
+      <div>
+        <img class="img" src="" alt="">
+      </div>
+      <button class="btn" data-js="reset">戻る</button>
+    `
+    let failHtml =
+    `
+      <p class="text">逃げられてしまった...</p>
+      <button class="btn mt" data-js="reset">戻る</button>
+    `
 
     function pokemonSearch() {
       $.ajax({
@@ -35,12 +48,32 @@
       }).done(function(res) {
         $("#wrapper").html(encountHtml);
         $("#wrapper div img").attr('src', res.sprites.front_default);
+        $("#wrapper div img").attr('alt', res.name);
+      }).fail(function(err) {
+        console.log(err);
+      })
+    }
+
+    function pokemonGet() {
+      if (parseInt(Math.random()*2) === 1) {
+        $("#wrapper").html(failHtml);
+        return;
+      }
+
+      $.ajax({
+        url: 'https://pokeapi.co/api/v2/item/4',
+        method: 'GET'
+      }).done(function(res) {
+        $("#wrapper").html(doneHtml);
+        $("#wrapper div img").attr('src', res.sprites.default);
+        $("#wrapper div img").attr('alt', res.name);
       }).fail(function(err) {
         console.log(err);
       })
     }
 
     $("#wrapper").on("click", "#pokemon_search", pokemonSearch);
+    $("#wrapper").on("click", "#catch", pokemonGet);
   </script>
 </body>
 </html>
