@@ -42,8 +42,9 @@
     `
 
     function pokemonSearch() {
+      let pokemonNo = parseInt(Math.random()*151 + 1);
       $.ajax({
-        url: 'https://pokeapi.co/api/v2/pokemon/1',
+        url: 'https://pokeapi.co/api/v2/pokemon/' + pokemonNo,
         method: 'GET'
       }).done(function(res) {
         $("#wrapper").html(encountHtml);
