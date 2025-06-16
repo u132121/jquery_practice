@@ -74,6 +74,9 @@
 
     $("#wrapper").on("click", "#pokemon_search", pokemonSearch);
     $("#wrapper").on("click", "#catch", pokemonGet);
+    $("#wrapper").on("click", '[data-js="reset"]', function() {
+      $("#wrapper").html('<button type="button" class="btn search-btn" id="pokemon_search">ポケモンを探す</button>');
+    });
   </script>
 </body>
 </html>
