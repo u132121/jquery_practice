@@ -30,7 +30,13 @@
       // .eq() 引数に応じたindexの要素を指定します。
       // .addClass() クラスを追加します。
       // .removeClass() クラスを削除します。
+      $(".nav li").click(function() {
+        const index = $(this).index();   // .nav liの要素の中でクリックされた要素が何番目か調べてindexに代入(0~2)
+
+        $(".contents li").addClass("is-hidden");  // .contents liを1度全て隠す
+        $(".contents li").eq(index).removeClass("is-hidden"); // クリックした.nav liの.contents liを表示する
+      });
+
     </script>
   </body>
 </html>
-
