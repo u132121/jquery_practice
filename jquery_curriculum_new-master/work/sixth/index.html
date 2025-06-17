@@ -41,7 +41,7 @@
       <button class="btn mt" data-js="reset">戻る</button>
     `
 
-    function pokemonSearch() {
+    function searchPokemon() {
       let pokemonNo = parseInt(Math.random()*151 + 1);
 
       $.ajax({
@@ -52,13 +52,13 @@
         $("#wrapper div img").attr('src', res.sprites.front_default);
         $("#wrapper div img").attr('alt', res.name);
 
-        pokemonJapanName(res.species.url);
+        getJapanName(res.species.url);
       }).fail(function(err) {
         console.log(err);
       })
     }
 
-    function pokemonJapanName(speciesUrl) {
+    function getJapanName(speciesUrl) {
       $.ajax({
         url: speciesUrl,
         method: 'GET'
@@ -69,7 +69,7 @@
       })
     }
 
-    function pokemonGet() {
+    function getPokemon() {
       if (parseInt(Math.random()*2) === 1) {
         $("#wrapper").html(failHtml);
         return;
@@ -87,8 +87,8 @@
       })
     }
 
-    $("#wrapper").on("click", "#pokemon_search", pokemonSearch);
-    $("#wrapper").on("click", "#catch", pokemonGet);
+    $("#wrapper").on("click", "#pokemon_search", searchPokemon);
+    $("#wrapper").on("click", "#catch", getPokemon);
     $("#wrapper").on("click", '[data-js="reset"]', function() {
       $("#wrapper").html('<button type="button" class="btn search-btn" id="pokemon_search">ポケモンを探す</button>');
     });
