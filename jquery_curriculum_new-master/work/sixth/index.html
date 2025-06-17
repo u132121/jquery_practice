@@ -16,13 +16,89 @@
   <script src="../../common/js/jquery.js"></script>
   <script>
     // 回答はここに書いてね
-    $.ajax({
-      url: 'https://~~~~~',
-      method: 'GET'
-    }).done(function(res) {
-      console.log(res);
-    }).fail(function(err) {
-      console.log(err);
+    const encountHtml =
+    `
+      <p class="name"></p>
+      <div>
+        <img class="img" src="" alt="">
+      </div>
+      <div>
+        <button class="btn" id="catch">捕まえる</button>
+        <button class="btn" data-js="reset">逃げる</button>
+      </div>
+    `;
+    const doneHtml =
+    `
+      <p class="name">ゲットしました</p>
+      <div>
+        <img class="img" src="" alt="">
+      </div>
+      <button class="btn" data-js="reset">戻る</button>
+    `
+    const failHtml =
+    `
+      <p class="text">逃げられてしまった...</p>
+      <button class="btn mt" data-js="reset">戻る</button>
+    `
+
+    function searchPokemon() {
+      let pokemonNo = parseInt(Math.random()*151 + 1);
+
+      $.ajax({
+        url: 'https://pokeapi.co/api/v2/pokemon/' + pokemonNo,
+        method: 'GET'
+      }).done(function(res) {
+        $("#wrapper").html(encountHtml);
+
+        setImg(res.sprites.front_default, res.name);
+        getJapanName(res.species.url);
+      }).fail(function(err) {
+        console.log(err);
+      })
+    }
+
+    function getJapanName(url) {
+      $.ajax({
+        url: url,
+        method: 'GET'
+      }).done(function(res) {
+        $(".name").text(res.names[0].name);
+      }).fail(function(err) {
+        console.log(err);
+      })
+    }
+
+    function getPokemon() {
+      let isGet = parseInt(Math.random()*2) === 1;
+
+      if (isGet) {
+        $("#wrapper").html(doneHtml);
+        showBall();
+        return;
+      }
+      $("#wrapper").html(failHtml);
+    }
+
+    function showBall(){
+      $.ajax({
+        url: 'https://pokeapi.co/api/v2/item/4',
+        method: 'GET'
+      }).done(function(res) {
+        setImg(res.sprites.default, res.name);
+      }).fail(function(err) {
+        console.log(err);
+      })
+    }
+
+    function setImg(src, alt) {
+      $("#wrapper div img").attr('src', src);
+      $("#wrapper div img").attr('alt', alt);
+    }
+
+    $("#wrapper").on("click", "#pokemon_search", searchPokemon);
+    $("#wrapper").on("click", "#catch", getPokemon);
+    $("#wrapper").on("click", '[data-js="reset"]', function() {
+      $("#wrapper").html('<button type="button" class="btn search-btn" id="pokemon_search">ポケモンを探す</button>');
     });
   </script>
 </body>

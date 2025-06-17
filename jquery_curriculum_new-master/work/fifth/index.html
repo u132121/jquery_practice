@@ -103,16 +103,13 @@
         const value = $(".select").val(); // selectで選択された要素のvalueを取得
 
         $(".list li").each(function(index, element) { // listの要素数分処理を行う
-
           if($(element).data("category-type") === value || "all" === value) {  // selectの要素が listの要素かall の場合true
             $(element).show(value);
           } else {
             $(element).hide(value);
           };
-
         });
-
-      }
+      };
 
       $(".select").change(selectList);
 
