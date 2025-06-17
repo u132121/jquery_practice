@@ -57,9 +57,9 @@
       })
     }
 
-    function getJapanName(speciesUrl) {
+    function getJapanName(url) {
       $.ajax({
-        url: speciesUrl,
+        url: url,
         method: 'GET'
       }).done(function(res) {
         $(".name").text(res.names[0].name);
