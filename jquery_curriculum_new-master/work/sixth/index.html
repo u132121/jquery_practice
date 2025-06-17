@@ -69,7 +69,9 @@
     }
 
     function getPokemon() {
-      if (parseInt(Math.random()*2) === 1) {
+      let isGet = parseInt(Math.random()*2) === 1;
+
+      if (isGet) {
         $("#wrapper").html(failHtml);
         return;
       }
