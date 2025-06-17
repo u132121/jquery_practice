@@ -16,7 +16,7 @@
   <script src="../../common/js/jquery.js"></script>
   <script>
     // 回答はここに書いてね
-    let encountHtml =
+    const encountHtml =
     `
       <p class="name"></p>
       <div>
@@ -27,7 +27,7 @@
         <button class="btn" data-js="reset">逃げる</button>
       </div>
     `;
-    let doneHtml =
+    const doneHtml =
     `
       <p class="name">ゲットしました</p>
       <div>
@@ -35,7 +35,7 @@
       </div>
       <button class="btn" data-js="reset">戻る</button>
     `
-    let failHtml =
+    const failHtml =
     `
       <p class="text">逃げられてしまった...</p>
       <button class="btn mt" data-js="reset">戻る</button>
