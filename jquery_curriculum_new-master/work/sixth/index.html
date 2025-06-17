@@ -72,16 +72,18 @@
       let isGet = parseInt(Math.random()*2) === 1;
 
       if (isGet) {
-        $("#wrapper").html(failHtml);
+        $("#wrapper").html(doneHtml);
+        showBall();
         return;
       }
+      $("#wrapper").html(failHtml);
+    }
 
+    function showBall(){
       $.ajax({
         url: 'https://pokeapi.co/api/v2/item/4',
         method: 'GET'
       }).done(function(res) {
-        $("#wrapper").html(doneHtml);
-
         setImg(res.sprites.default, res.name);
       }).fail(function(err) {
         console.log(err);
